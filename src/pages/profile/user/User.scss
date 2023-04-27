@@ -1,0 +1,17 @@
+.user {
+  height: calc(100vh - 270px);
+
+  .log-out {
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      background: #F6A95F;
+      border: 1px solid #F6A95F;
+      border-radius: 12px;
+      padding: 10px 30px;
+      cursor: pointer;
+    }
+  }
+
+}

@@ -1,0 +1,36 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
+
+  ul {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+
+    li {
+
+      a {
+        color: #3E352F;
+      }
+    }
+  }
+
+  p {
+    margin-top: 8px;
+    color: #3E352F;
+  }
+}
+
+@media (max-width: 1024px) {
+  .footer {
+    width: 100%;
+    text-align: center;
+    ul {
+      display: none;
+    }
+
+  }
+
+}
