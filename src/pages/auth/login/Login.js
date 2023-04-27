@@ -4,7 +4,6 @@ import couplePic from '../../../assets/images/couple.png'
 import smallHeart from  '../../../assets/images/heart.svg'
 import bigHeart from  '../../../assets/images/heartBig.svg'
 import {useCallback, useState} from "react";
-import { useNavigate } from "react-router-dom";
 import loginApi from "../../../api/auth";
 import Cookies from "js-cookie";
 
@@ -20,7 +19,6 @@ export const Login = ({setToken}) => {
 
     const [formState, setFormState] = useState(form);
     const [error, setError] = useState(formError);
-    let navigate = useNavigate();
 
     const handleUsernameChange = useCallback((e) => {
         setFormState({...formState, username: e.target.value})
@@ -43,11 +41,9 @@ export const Login = ({setToken}) => {
         }
 
         loginApi(formState).then(res => {
-            Cookies.set("access-token", res.data.Data.access_token);
-            setToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoicmF6bWlrLmRhdnR5YW5AZ21haWwuY29tIiwiZ2VuZGVyIjoiTWFsZSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpYXQiOjE2ODI2MTYyNzksImV4cCI6MTY4MjYzNDI3OX0.bTrhxeJ5C13YByMzt5Pwuy648oQVT4Sjcd9GrOmWb5E')
-            if (!!Cookies.get('access-token')) {
-                navigate('../user')
-            }
+            const token = res.data.Data.access_token
+            Cookies.set("access-token", token);
+            setToken(token)
         }).catch(e => {
             if (e.response.data.Error.code === 117) {
                 return setError({...error, username: e.response.data.Error.message})
@@ -55,7 +51,7 @@ export const Login = ({setToken}) => {
                 return setError({...error, password: e.response.data.Error.message})
             }
         })
-    },[formState, error, navigate, setToken])
+    },[formState, error, setToken])
 
 
 
